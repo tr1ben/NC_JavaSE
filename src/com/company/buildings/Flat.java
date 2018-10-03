@@ -1,4 +1,4 @@
-package com.company;
+package com.company.buildings;
 
 public class Flat {
     private double area;

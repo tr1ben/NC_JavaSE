@@ -1,4 +1,4 @@
-package com.company;
+package com.company.buildings;
 
 public class Main {
 
@@ -14,5 +14,7 @@ public class Main {
         Dwelling firstDwelling = new Dwelling(new DwellingFloor[]{firstFloor, secondFloor, thirdFloor});
         Dwelling secondDwelling = new Dwelling(3, new int[]{2,3,2});
         System.out.println(firstDwelling.getGlobalArea());
+        Flat[] SortedList = firstDwelling.getDescAreaSortedFlatList();
+        for (Flat flat : SortedList) System.out.println(flat.getArea());
     }
 }
