@@ -16,5 +16,10 @@ public class Main {
         System.out.println(firstDwelling.getGlobalArea());
         Flat[] SortedList = firstDwelling.getDescAreaSortedFlatList();
         for (Flat flat : SortedList) System.out.println(flat.getArea());
+
+        Office fo = new Office();
+        Office so = new Office(60);
+        OfficeFloor fFloor = new OfficeFloor(new Office[]{fo, so, fo, so, so, fo});
+        System.out.println("Офисов: " + fFloor.getOfficesCount());
     }
 }
