@@ -8,6 +8,7 @@ public class OfficeFloor {
 
         public Node(Office head) {
             this.head = head;
+            this.next = this;
         }
 
         public Node(Office head, Node next) {
@@ -41,9 +42,7 @@ public class OfficeFloor {
 
     private Node getNode(int num) {
         Node node = head;
-        for (int i = 1; i < num; i++) {
-            node = node.getNext();
-        }
+        for (int i = 1; i < num; i++) node = node.getNext();
         return node;
     }
 
@@ -66,22 +65,12 @@ public class OfficeFloor {
 
     public OfficeFloor(int officesCount) {
         head = new Node(new Office());
-        Node node = head;
-        for (int i = 1; i < officesCount; i++) {
-            node.setNext(new Node(new Office()));
-            node = node.getNext();
-        }
-        node.setNext(head);
+        for (int i = 1; i < officesCount; i++) addNode(i+1, new Node(new Office()));
     }
 
     public OfficeFloor(Office[] offices) {
         head = new Node(offices[0]);
-        Node node = head;
-        for (int i = 1; i < offices.length; i++) {
-            node.setNext(new Node(offices[i]));
-            node = node.getNext();
-        }
-        node.setNext(head);
+        for (int i = 1; i < offices.length; i++) addNode(i+1, new Node(offices[i]));
     }
 
     public int getOfficesCount() {
