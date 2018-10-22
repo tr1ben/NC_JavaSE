@@ -32,10 +32,6 @@ public class OfficeFloor {
             this.next = next;
         }
 
-        public boolean hasNext() {
-            return this.next != null && this.next != this;
-        }
-
     }
 
     private Node headNode;

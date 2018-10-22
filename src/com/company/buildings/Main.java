@@ -26,7 +26,7 @@ public class Main {
         System.out.println("Офисов: " + fFloor.getOfficesCount());
         System.out.println("Area: " + fFloor.getArea());
         System.out.println("Комнат: " + fFloor.getRoomsCount());
-        fFloor.printOffices();
+        /*fFloor.printOffices();
         fFloor.removeOffice(4);
         System.out.println("=====================");
         fFloor.printOffices();
@@ -40,6 +40,17 @@ public class Main {
         for (int i = 0; i < offf.length; i++) {
             System.out.println("offf" + i + " = " + offf[i].getArea());
         }
-        System.out.println("BEST = " + fFloor.getBestSpace().getArea());
+        System.out.println("BEST = " + fFloor.getBestSpace().getArea());*/
+
+        OfficeFloor sFloor = new OfficeFloor(new Office[]{qo, fo, so});
+        OfficeFloor tFloor = new OfficeFloor(new Office[]{so, so, fo});
+        OfficeBuilding fBuilding = new OfficeBuilding(new OfficeFloor[]{fFloor, sFloor, tFloor});
+        System.out.println("AREA = " + fBuilding.getArea());
+        System.out.println("RoomsCount = " + fBuilding.getRoomsCount());
+        OfficeFloor[] oFloors = fBuilding.getOfficeFloors();
+        for (int i = 0; i < oFloors.length; i++) {
+            System.out.println(oFloors[i].getArea());
+        }
+
     }
 }
