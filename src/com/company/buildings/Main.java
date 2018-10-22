@@ -19,7 +19,27 @@ public class Main {
 
         Office fo = new Office();
         Office so = new Office(60);
+        Office qo = new Office(90);
+        System.out.println("Fo = " + fo.getArea());
+        System.out.println("So = " + so.getArea());
         OfficeFloor fFloor = new OfficeFloor(new Office[]{fo, so, fo, so, so, fo});
         System.out.println("Офисов: " + fFloor.getOfficesCount());
+        System.out.println("Area: " + fFloor.getArea());
+        System.out.println("Комнат: " + fFloor.getRoomsCount());
+        fFloor.printOffices();
+        fFloor.removeOffice(4);
+        System.out.println("=====================");
+        fFloor.printOffices();
+        fFloor.removeOffice(0);
+        System.out.println("=====================");
+        fFloor.printOffices();
+        fFloor.insertOffice(2, qo);
+        System.out.println("=====================");
+        fFloor.printOffices();
+        Office[] offf = fFloor.getOffices();
+        for (int i = 0; i < offf.length; i++) {
+            System.out.println("offf" + i + " = " + offf[i].getArea());
+        }
+        System.out.println("BEST = " + fFloor.getBestSpace().getArea());
     }
 }
