@@ -132,7 +132,7 @@ public class OfficeBuilding {
     public OfficeFloor[] getOfficeFloors(){
         OfficeFloor[] officeFloors = new OfficeFloor[size];
         for (int i = 0; i < size; i++) {
-            officeFloors[i] = getNode(i+1).getHead();
+            officeFloors[i] = getNode(i + 1).getHead();
         }
         return officeFloors;
     }
@@ -145,5 +145,87 @@ public class OfficeBuilding {
     public void setOfficeFloor(int num, OfficeFloor newOfficeFloor) {
         getNode(num+1).setHead(newOfficeFloor);
     }
+
+    public Office getOffice(int num) {
+        if(num < size) {
+            int counter = 0;
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < getOfficeFloor(i).getOfficesCount(); j++) {
+                    if(counter == num) return getOfficeFloor(i).getOffice(j);
+                    counter++;
+                }
+            }
+        }
+        return null;
+    }
+
+    public void setOffice(int num, Office newOffice) {
+        if(num < size) {
+            int counter = 0;
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < getOfficeFloor(i).getOfficesCount(); j++) {
+                    if(counter == num) getOfficeFloor(i).setOffice(j, newOffice);
+                    counter++;
+                }
+            }
+        }
+    }
+
+    public void insertOffice(int num, Office newOffice) {
+        if(num < size) {
+            int counter = 0;
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < getOfficeFloor(i).getOfficesCount(); j++) {
+                    if(counter == num) getOfficeFloor(i).insertOffice(j, newOffice);
+                    counter++;
+                }
+            }
+        }
+    }
+
+    public void removeOffice(int num) {
+        if(num < size) {
+            int counter = 0;
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < getOfficeFloor(i).getOfficesCount(); j++) {
+                    if(counter == num) getOfficeFloor(i).removeOffice(j);
+                    counter++;
+                }
+            }
+        }
+    }
+
+    public Office getBestSpace() {
+        Office bestSpace = getNode(0).getHead().getBestSpace();
+        for (int i = 1; i < size; i++) {
+            if(getNode(i+1).getHead().getBestSpace().getArea() > bestSpace.getArea()) bestSpace = getNode(i+1).getHead().getBestSpace();
+        }
+        return bestSpace;
+    }
+
+    //по убыванию площадей
+    public Office[] getSortedOffices() {
+        Office[] offices = new Office[getOfficesCount()];
+        int counter = 0;
+        Office temp;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < getOfficeFloor(i).getOfficesCount(); j++) {
+                offices[counter] = getOfficeFloor(i).getOffice(j);
+                counter++;
+            }
+        }
+        for (int i = 0; i < offices.length-1; i++) {
+            for (int j = 0; j < offices.length-i-1; j++) {
+                if(offices[j].getArea() < offices[j+1].getArea()) {
+                    temp = offices[j];
+                    offices[j] = offices[j+1];
+                    offices[j+1] = temp;
+                }
+            }
+        }
+        return offices;
+    }
+
+
 
 }
