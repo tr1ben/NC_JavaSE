@@ -103,8 +103,14 @@ public class OfficeBuilding {
         for (int i = 1; i < officeFloors.length; i++) addNode(new Node(officeFloors[i]));
     }
 
+    /*
+        Получение общего количества этажей здания
+    */
     public int getFloorsCount() { return size; }
-    
+
+    /*
+        Получение общего количества офисов здания
+    */
     public int getOfficesCount() {
         int officesCount = 0;
         for (int i = 0; i < size; i++) {
@@ -113,6 +119,9 @@ public class OfficeBuilding {
         return officesCount;
     }
 
+    /*
+        Получение общей площади помещений здания
+    */
     public double getArea() {
         double area = 0;
         for (int i = 0; i < size; i++) {
@@ -121,6 +130,9 @@ public class OfficeBuilding {
         return area;
     }
 
+    /*
+        Получение общего количества комнат здания
+    */
     public int getRoomsCount() {
         int roomsCount = 0;
         for (int i = 0; i < size; i++) {
@@ -129,6 +141,9 @@ public class OfficeBuilding {
         return roomsCount;
     }
 
+    /*
+        Получение массива этажей офисного здания
+    */
     public OfficeFloor[] getOfficeFloors(){
         OfficeFloor[] officeFloors = new OfficeFloor[size];
         for (int i = 0; i < size; i++) {
@@ -137,15 +152,24 @@ public class OfficeBuilding {
         return officeFloors;
     }
 
+    /*
+        Получение этажа по номеру в здании
+    */
     public OfficeFloor getOfficeFloor(int num) {
         if(num < size) return getNode(num+1).getHead();
         else return null;
     }
 
+    /*
+        Изменение этажа по номеру в здании и ссылке на обновленный этаж
+    */
     public void setOfficeFloor(int num, OfficeFloor newOfficeFloor) {
         getNode(num+1).setHead(newOfficeFloor);
     }
 
+    /*
+        Получение офиса по номеру в офисном здании
+    */
     public Office getOffice(int num) {
         if(num < size) {
             int counter = 0;
@@ -159,6 +183,9 @@ public class OfficeBuilding {
         return null;
     }
 
+    /*
+        Изменение объекта офиса по номеру в доме и ссылке на новый офис
+    */
     public void setOffice(int num, Office newOffice) {
         if(num < size) {
             int counter = 0;
@@ -171,6 +198,9 @@ public class OfficeBuilding {
         }
     }
 
+    /*
+        Добавление офиса в здание по номеру офиса в здании и ссылке на офис
+    */
     public void insertOffice(int num, Office newOffice) {
         if(num < size) {
             int counter = 0;
@@ -183,6 +213,9 @@ public class OfficeBuilding {
         }
     }
 
+    /*
+        Удаление офиса по номеру в здании
+    */
     public void removeOffice(int num) {
         if(num < size) {
             int counter = 0;
@@ -195,6 +228,9 @@ public class OfficeBuilding {
         }
     }
 
+    /*
+        Получение самого большого по площади офиса здания
+    */
     public Office getBestSpace() {
         Office bestSpace = getNode(0).getHead().getBestSpace();
         for (int i = 1; i < size; i++) {
@@ -202,8 +238,9 @@ public class OfficeBuilding {
         }
         return bestSpace;
     }
-
-    //по убыванию площадей
+    /*
+        Получение отсортированного по убыванию площадей массива офисов
+    */
     public Office[] getDescAreaSortedOfficeList() {
         Office[] offices = new Office[getOfficesCount()];
         for (int i = 0; i < offices.length; i++) {
@@ -220,7 +257,4 @@ public class OfficeBuilding {
         }
         return offices;
     }
-
-
-
 }
