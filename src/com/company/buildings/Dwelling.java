@@ -12,81 +12,137 @@ public class Dwelling {
         this.dwellingFloors = dwellingFloors;
     }
 
+    /*
+        Получение общего количества этажей дома
+    */
     public int getFloorsCount() {
         return dwellingFloors.length;
     }
 
+    /*
+        Получение общего количества квартир дома
+    */
     public int getFlatsCount() {
         int flatsCount = 0;
         for (DwellingFloor floor : dwellingFloors) flatsCount += floor.getFlatsCount();
         return flatsCount;
     }
 
-    public double getGlobalArea() {
+    /*
+        Получение общей площади квартир дома
+    */
+    public double getArea() {
         double area = 0;
-        for (DwellingFloor floor : dwellingFloors) area += floor.getGlobalArea();
+        for (DwellingFloor floor : dwellingFloors) area += floor.getArea();
         return area;
     }
 
+    /*
+        Получение общего количества комнат дома
+    */
     public int getRoomsCount() {
         int roomsCount = 0;
-        for (DwellingFloor floor : dwellingFloors) roomsCount += floor.getGlobalRoomsCount();
+        for (DwellingFloor floor : dwellingFloors) roomsCount += floor.getRoomsCount();
         return roomsCount;
     }
 
-    public DwellingFloor[] getDwellingFloors() {
-        return dwellingFloors;
-    }
+    /*
+        Получение массива этажей дома
+    */
+    public DwellingFloor[] getDwellingFloors() { return dwellingFloors; }
 
+    /*
+        Получение этажа по номеру в доме
+    */
     public DwellingFloor getFloor(int num) {
-        return dwellingFloors[num];
+        try { return dwellingFloors[num]; }
+        catch (ArrayIndexOutOfBoundsException e) {
+            throw new FloorIndexOutOfBoundsException();
+        }
     }
 
+    /*
+        Изменение этажа по номеру в доме и ссылке на обновленный этаж
+    */
     public void changeFloor(int num, DwellingFloor newFloor) {
-        dwellingFloors[num] = newFloor;
+        try { dwellingFloors[num] = newFloor; }
+        catch (ArrayIndexOutOfBoundsException e) {
+            throw new FloorIndexOutOfBoundsException();
+        }
     }
 
+    /*
+        Получения квартиры по номеру в доме
+    */
     public Flat getFlat(int flatNum) {
-        int num = 0;
-        for (DwellingFloor floor : dwellingFloors) {
-            for (int i = 0; i < floor.getFlatsCount(); i++) {
-                if(num == flatNum) return floor.getFlat(i);
-                num++;
+        try {
+            int num = 0;
+            for (DwellingFloor floor : dwellingFloors) {
+                for (int i = 0; i < floor.getFlatsCount(); i++) {
+                    if (num == flatNum) return floor.getFlat(i);
+                    num++;
+                }
             }
+            return null;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new FloorIndexOutOfBoundsException();
         }
-        return null;
     }
 
+    /*
+        Изменение квартиры по номеру в доме и ссылке на новую квартиру
+    */
     public void changeFlat(int flatNum, Flat newFlat){
-        int num = 0;
-        for (DwellingFloor floor : dwellingFloors) {
-            for (int i = 0; i < floor.getFlatsCount(); i++) {
-                if(num == flatNum) floor.changeFlat(i, newFlat);
-                num++;
+        try {
+            int num = 0;
+            for (DwellingFloor floor : dwellingFloors) {
+                for (int i = 0; i < floor.getFlatsCount(); i++) {
+                    if (num == flatNum) floor.changeFlat(i, newFlat);
+                    num++;
+                }
             }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new FloorIndexOutOfBoundsException();
         }
     }
 
+    /*
+        Добавление квартиры по будущему номеру квартиры в доме и ссылке на новую квартиру
+    */
     public void addFlat(int flatNum, Flat newFlat){
-        int num = 0;
-        for (DwellingFloor floor : dwellingFloors) {
-            for (int i = 0; i < floor.getFlatsCount(); i++) {
-                if(num == flatNum) floor.addFlat(i, newFlat);
-                num++;
+        try {
+            int num = 0;
+            for (DwellingFloor floor : dwellingFloors) {
+                for (int i = 0; i < floor.getFlatsCount(); i++) {
+                    if (num == flatNum) floor.addFlat(i, newFlat);
+                    num++;
+                }
             }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new FloorIndexOutOfBoundsException();
         }
     }
 
+    /*
+        Удаление квартиры по номеру в доме
+    */
     public void removeFlat(int flatNum) {
-        int num = 0;
-        for (DwellingFloor floor : dwellingFloors) {
-            for (int i = 0; i < floor.getFlatsCount(); i++) {
-                if(num == flatNum) floor.removeFlat(i);
-                num++;
+        try {
+            int num = 0;
+            for (DwellingFloor floor : dwellingFloors) {
+                for (int i = 0; i < floor.getFlatsCount(); i++) {
+                    if (num == flatNum) floor.removeFlat(i);
+                    num++;
+                }
             }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new FloorIndexOutOfBoundsException();
         }
     }
 
+    /*
+        Получение самой большой по площади квартиры дома
+    */
     public Flat getBestSpace() {
         double bestSpace = 0;
         Flat bestFlat = null;
@@ -99,7 +155,9 @@ public class Dwelling {
         return bestFlat;
     }
 
-    //метод получения отсортированного по убыванию площадей массива квартир
+    /*
+        Получение отсортированного по убыванию площадей массива квартир
+    */
     public Flat[] getDescAreaSortedFlatList() {
         Flat[] flats = new Flat[getFlatsCount()];
         for (int i = 0; i < flats.length; i++) {

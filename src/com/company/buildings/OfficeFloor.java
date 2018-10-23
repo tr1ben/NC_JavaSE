@@ -37,12 +37,18 @@ public class OfficeFloor {
     private Node headNode;
     private int size = 1;
 
+    /*
+        Получение узла по номеру
+    */
     private Node getNode(int num) {
         Node node = headNode;
         for (int i = 1; i < num; i++) node = node.getNext();
         return node;
     }
 
+    /*
+        Добавление узла в конец
+    */
     private void addNode(Node newNode){
         Node lastNode = getNode(size);
         lastNode.setNext(newNode);
@@ -50,6 +56,9 @@ public class OfficeFloor {
         size++;
     }
 
+    /*
+        Вставка (добавление) узла по номеру
+    */
     private void insertNode(int num, Node newNode) {
         Node node;
         if(num == 1) {
@@ -64,6 +73,9 @@ public class OfficeFloor {
         size++;
     }
 
+    /*
+        Удаление узла по номеру
+    */
     private void removeNode(int num) {
         if(num == 1) {
             headNode = headNode.getNext();
@@ -82,10 +94,14 @@ public class OfficeFloor {
         for (int i = 1; i < offices.length; i++) addNode(new Node(offices[i]));
     }
 
-    public int getOfficesCount() {
-        return size;
-    }
+    /*
+        Получение количества офисов на этаже
+    */
+    public int getOfficesCount() { return size; }
 
+    /*
+        Получение общей площади помещений этажа
+    */
     public double getArea() {
         Node node = headNode;
         double area = 0;
@@ -96,6 +112,9 @@ public class OfficeFloor {
         return area;
     }
 
+    /*
+        Получение общего количества комнат этажа
+    */
     public int getRoomsCount() {
         Node node = headNode;
         int roomsCount = 0;
@@ -106,6 +125,9 @@ public class OfficeFloor {
         return roomsCount;
     }
 
+    /*
+        Получение массива офисов этажа
+    */
     public Office[] getOffices() {
         Office[] offices = new Office[size];
         for (int i = 0; i < size; i++) {
@@ -114,37 +136,44 @@ public class OfficeFloor {
         return offices;
     }
 
+    /*
+        Получение офиса по номеру на этаже
+    */
     public Office getOffice(int num) {
         if(num < size) return getNode(num+1).getHead();
         else return null;
     }
 
+    /*
+        Изменение офиса по номеру на этаже и ссылке на обновленный офис
+    */
     public void setOffice(int num, Office newOffice) {
         getNode(num+1).setHead(newOffice);
     }
 
+    /*
+        Добавление нового офиса на этаже по будущему номеру офиса
+    */
     public void insertOffice(int num, Office office) {
         insertNode(num+1, new Node(office));
     }
 
+    /*
+        Удаление офиса по номеру на этаже
+    */
     public void removeOffice(int num) {
         removeNode(num+1);
     }
 
+    /*
+        Получение самого большого по площади офиса этажа
+    */
     public Office getBestSpace() {
         Office bestSpace = getNode(1).getHead();
         for (int i = 2; i < size; i++) {
             if(getNode(i).getHead().getArea() > bestSpace.getArea()) bestSpace = getNode(i).getHead();
         }
         return bestSpace;
-    }
-
-    public void printOffices() {
-        Node node = headNode;
-        for (int i = 0; i < size; i++) {
-            System.out.println(node.getHead().getArea());
-            node = node.getNext();
-        }
     }
 
 }

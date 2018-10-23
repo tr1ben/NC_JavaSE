@@ -22,18 +22,30 @@ public class Flat {
         this.roomsCount = roomsCount;
     }
 
+    /*
+        Получение площади квартиры
+    */
     public double getArea() {
         return area;
     }
 
+    /*
+        Получение количества комнат в квартире
+     */
     public int getRoomsCount() {
         return roomsCount;
     }
 
+    /*
+        Изменение площади квартиры
+    */
     public void setArea(double area) {
         this.area = area;
     }
 
+    /*
+        Изменение количества комнат в квартире
+    */
     public void setRoomsCount(int roomsCount) {
         this.roomsCount = roomsCount;
     }

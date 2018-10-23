@@ -10,10 +10,11 @@ public class Main {
         Flat fifth = new Flat(30, 1);
         DwellingFloor firstFloor = new DwellingFloor(new Flat[]{first, second});
         DwellingFloor secondFloor = new DwellingFloor(3);
+        secondFloor.addFlat(100, new Flat());
         DwellingFloor thirdFloor = new DwellingFloor(new Flat[]{third, fourth, fifth});
         Dwelling firstDwelling = new Dwelling(new DwellingFloor[]{firstFloor, secondFloor, thirdFloor});
         Dwelling secondDwelling = new Dwelling(3, new int[]{2,3,2});
-        System.out.println(firstDwelling.getGlobalArea());
+        System.out.println(firstDwelling.getArea());
         Flat[] SortedList = firstDwelling.getDescAreaSortedFlatList();
         for (Flat flat : SortedList) System.out.println(flat.getArea());
 

@@ -204,22 +204,17 @@ public class OfficeBuilding {
     }
 
     //по убыванию площадей
-    public Office[] getSortedOffices() {
+    public Office[] getDescAreaSortedOfficeList() {
         Office[] offices = new Office[getOfficesCount()];
-        int counter = 0;
-        Office temp;
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < getOfficeFloor(i).getOfficesCount(); j++) {
-                offices[counter] = getOfficeFloor(i).getOffice(j);
-                counter++;
-            }
+        for (int i = 0; i < offices.length; i++) {
+            offices[i] = getOffice(i);
         }
-        for (int i = 0; i < offices.length-1; i++) {
-            for (int j = 0; j < offices.length-i-1; j++) {
-                if(offices[j].getArea() < offices[j+1].getArea()) {
-                    temp = offices[j];
-                    offices[j] = offices[j+1];
-                    offices[j+1] = temp;
+        for (int out = offices.length - 1; out >= 1; out--){
+            for (int in = 0; in < out; in++){
+                if(offices[in].getArea() < offices[in + 1].getArea()) {
+                    Office dummy = offices[in];
+                    offices[in] = offices[in + 1];
+                    offices[in + 1] = dummy;
                 }
             }
         }

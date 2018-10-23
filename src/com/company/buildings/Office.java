@@ -22,18 +22,30 @@ public class Office {
         this.roomsCount = roomsCount;
     }
 
+    /*
+        Получение площади офиса
+    */
     public double getArea() {
         return area;
     }
 
+    /*
+        Получение количества комнат в офисе
+    */
     public int getRoomsCount() {
         return roomsCount;
     }
 
+    /*
+        Изменение площади офиса
+    */
     public void setArea(double area) {
         this.area = area;
     }
 
+    /*
+        Изменение количества комнат в офисе
+    */
     public void setRoomsCount(int roomsCount) {
         this.roomsCount = roomsCount;
     }
