@@ -64,7 +64,7 @@ public class Dwelling {
     /*
         Изменение этажа по номеру в доме и ссылке на обновленный этаж
     */
-    public void changeFloor(int num, DwellingFloor newFloor) {
+    public void setFloor(int num, DwellingFloor newFloor) {
         try { dwellingFloors[num] = newFloor; }
         catch (ArrayIndexOutOfBoundsException e) {
             throw new FloorIndexOutOfBoundsException();
@@ -75,34 +75,28 @@ public class Dwelling {
         Получения квартиры по номеру в доме
     */
     public Flat getFlat(int flatNum) {
-        try {
-            int num = 0;
-            for (DwellingFloor floor : dwellingFloors) {
-                for (int i = 0; i < floor.getFlatsCount(); i++) {
-                    if (num == flatNum) return floor.getFlat(i);
-                    num++;
-                }
+        if((flatNum < 0) || (flatNum >= getFlatsCount())) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
+        int num = 0;
+        for (DwellingFloor floor : dwellingFloors) {
+            for (int i = 0; i < floor.getFlatsCount(); i++) {
+                if (num == flatNum) return floor.getFlat(i);
+                num++;
             }
-            return null;
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new FloorIndexOutOfBoundsException();
         }
+        return null;
     }
 
     /*
         Изменение квартиры по номеру в доме и ссылке на новую квартиру
     */
-    public void changeFlat(int flatNum, Flat newFlat){
-        try {
-            int num = 0;
-            for (DwellingFloor floor : dwellingFloors) {
-                for (int i = 0; i < floor.getFlatsCount(); i++) {
-                    if (num == flatNum) floor.changeFlat(i, newFlat);
-                    num++;
-                }
+    public void setFlat(int flatNum, Flat newFlat){
+        if((flatNum < 0) || (flatNum >= getFlatsCount())) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
+        int num = 0;
+        for (DwellingFloor floor : dwellingFloors) {
+            for (int i = 0; i < floor.getFlatsCount(); i++) {
+                if (num == flatNum) floor.setFlat(i, newFlat);
+                num++;
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new FloorIndexOutOfBoundsException();
         }
     }
 
@@ -110,16 +104,13 @@ public class Dwelling {
         Добавление квартиры по будущему номеру квартиры в доме и ссылке на новую квартиру
     */
     public void addFlat(int flatNum, Flat newFlat){
-        try {
-            int num = 0;
-            for (DwellingFloor floor : dwellingFloors) {
-                for (int i = 0; i < floor.getFlatsCount(); i++) {
-                    if (num == flatNum) floor.addFlat(i, newFlat);
-                    num++;
-                }
+        if((flatNum < 0) || (flatNum > getFlatsCount())) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
+        int num = 0;
+        for (DwellingFloor floor : dwellingFloors) {
+            for (int i = 0; i < floor.getFlatsCount(); i++) {
+                if (num == flatNum) floor.addFlat(i, newFlat);
+                num++;
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new FloorIndexOutOfBoundsException();
         }
     }
 
@@ -127,16 +118,13 @@ public class Dwelling {
         Удаление квартиры по номеру в доме
     */
     public void removeFlat(int flatNum) {
-        try {
-            int num = 0;
-            for (DwellingFloor floor : dwellingFloors) {
-                for (int i = 0; i < floor.getFlatsCount(); i++) {
-                    if (num == flatNum) floor.removeFlat(i);
-                    num++;
-                }
+        if((flatNum < 0) || (flatNum >= getFlatsCount())) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
+        int num = 0;
+        for (DwellingFloor floor : dwellingFloors) {
+            for (int i = 0; i < floor.getFlatsCount(); i++) {
+                if (num == flatNum) floor.removeFlat(i);
+                num++;
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new FloorIndexOutOfBoundsException();
         }
     }
 
@@ -174,5 +162,4 @@ public class Dwelling {
         }
         return flats;
     }
-
 }

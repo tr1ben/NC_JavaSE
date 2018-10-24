@@ -140,21 +140,23 @@ public class OfficeFloor {
         Получение офиса по номеру на этаже
     */
     public Office getOffice(int num) {
-        if(num < size) return getNode(num+1).getHead();
-        else return null;
+        if((num < 0) || (num >= size)) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
+        return getNode(num+1).getHead();
     }
 
     /*
         Изменение офиса по номеру на этаже и ссылке на обновленный офис
     */
     public void setOffice(int num, Office newOffice) {
+        if((num < 0) || (num >= size)) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
         getNode(num+1).setHead(newOffice);
     }
 
     /*
         Добавление нового офиса на этаже по будущему номеру офиса
     */
-    public void insertOffice(int num, Office office) {
+    public void addOffice(int num, Office office) {
+        if((num < 0) || (num > size)) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
         insertNode(num+1, new Node(office));
     }
 
@@ -162,6 +164,7 @@ public class OfficeFloor {
         Удаление офиса по номеру на этаже
     */
     public void removeOffice(int num) {
+        if((num < 0) || (num >= size)) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
         removeNode(num+1);
     }
 

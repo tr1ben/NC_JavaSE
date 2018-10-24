@@ -55,7 +55,7 @@ public class DwellingFloor {
     /*
         Изменение квартиры по номеру на этаже и ссылке на новую квартиру
     */
-    public void changeFlat(int num, Flat newFlat) {
+    public void setFlat(int num, Flat newFlat) {
         try { flats[num] = newFlat; }
         catch(ArrayIndexOutOfBoundsException e) {
             throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
@@ -66,38 +66,32 @@ public class DwellingFloor {
         Добавление новой квартиры по будущему номеру на этаже и ссылке на новую квартиру
     */
     public void addFlat(int num, Flat newFlat) {
-        try {
-            Flat[] newFlats = new Flat[flats.length + 1];
-            int oldNum = 0;
-            for (int i = 0; i < newFlats.length; i++) {
-                if (num == i) newFlats[i] = newFlat;
-                else {
-                    newFlats[i] = flats[oldNum];
-                    oldNum++;
-                }
+        if((num < 0) || (num > flats.length)) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
+        Flat[] newFlats = new Flat[flats.length + 1];
+        int oldNum = 0;
+        for (int i = 0; i < newFlats.length; i++) {
+            if (num == i) newFlats[i] = newFlat;
+            else {
+                newFlats[i] = flats[oldNum];
+                oldNum++;
             }
-            flats = newFlats;
-        } catch(ArrayIndexOutOfBoundsException e) {
-            throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
         }
+        flats = newFlats;
     }
 
     /*
         Удаление квартиры по номеру на этаже
     */
     public void removeFlat(int num) {
-        try {
-            Flat[] newFlats = new Flat[flats.length - 1];
-            int oldNum = 0;
-            for (int i = 0; i < newFlats.length; i++) {
-                if (num == i) oldNum++;
-                newFlats[i] = flats[oldNum];
-                oldNum++;
-            }
-            flats = newFlats;
-        } catch(ArrayIndexOutOfBoundsException e) {
-            throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
+        if((num < 0) || (num >= flats.length)) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
+        Flat[] newFlats = new Flat[flats.length - 1];
+        int oldNum = 0;
+        for (int i = 0; i < newFlats.length; i++) {
+            if (num == i) oldNum++;
+            newFlats[i] = flats[oldNum];
+            oldNum++;
         }
+        flats = newFlats;
     }
 
     /*
