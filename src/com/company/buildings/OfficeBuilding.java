@@ -156,14 +156,15 @@ public class OfficeBuilding {
         Получение этажа по номеру в здании
     */
     public OfficeFloor getOfficeFloor(int num) {
-        if(num < size) return getNode(num+1).getHead();
-        else return null;
+        if((num < 0) || (num >= size)) throw new FloorIndexOutOfBoundsException("FloorIndexOutOfBoundsException");
+        return getNode(num+1).getHead();
     }
 
     /*
         Изменение этажа по номеру в здании и ссылке на обновленный этаж
     */
     public void setOfficeFloor(int num, OfficeFloor newOfficeFloor) {
+        if((num < 0) || (num >= size)) throw new SpaceIndexOutOfBoundsException("FloorIndexOutOfBoundsException");
         getNode(num+1).setHead(newOfficeFloor);
     }
 
@@ -171,13 +172,12 @@ public class OfficeBuilding {
         Получение офиса по номеру в офисном здании
     */
     public Office getOffice(int num) {
-        if(num < size) {
-            int counter = 0;
-            for (int i = 0; i < size; i++) {
-                for (int j = 0; j < getOfficeFloor(i).getOfficesCount(); j++) {
-                    if(counter == num) return getOfficeFloor(i).getOffice(j);
-                    counter++;
-                }
+        if((num < 0) || (num >= getOfficesCount())) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
+        int counter = 0;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < getOfficeFloor(i).getOfficesCount(); j++) {
+                if(counter == num) return getOfficeFloor(i).getOffice(j);
+                counter++;
             }
         }
         return null;
@@ -187,13 +187,12 @@ public class OfficeBuilding {
         Изменение объекта офиса по номеру в доме и ссылке на новый офис
     */
     public void setOffice(int num, Office newOffice) {
-        if(num < size) {
-            int counter = 0;
-            for (int i = 0; i < size; i++) {
-                for (int j = 0; j < getOfficeFloor(i).getOfficesCount(); j++) {
-                    if(counter == num) getOfficeFloor(i).setOffice(j, newOffice);
-                    counter++;
-                }
+        if((num < 0) || (num >= getOfficesCount())) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
+        int counter = 0;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < getOfficeFloor(i).getOfficesCount(); j++) {
+                if(counter == num) getOfficeFloor(i).setOffice(j, newOffice);
+                counter++;
             }
         }
     }
@@ -201,14 +200,13 @@ public class OfficeBuilding {
     /*
         Добавление офиса в здание по номеру офиса в здании и ссылке на офис
     */
-    public void insertOffice(int num, Office newOffice) {
-        if(num < size) {
-            int counter = 0;
-            for (int i = 0; i < size; i++) {
-                for (int j = 0; j < getOfficeFloor(i).getOfficesCount(); j++) {
-                    if(counter == num) getOfficeFloor(i).insertOffice(j, newOffice);
-                    counter++;
-                }
+    public void addOffice(int num, Office newOffice) {
+        if((num < 0) || (num > getOfficesCount())) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
+        int counter = 0;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < getOfficeFloor(i).getOfficesCount(); j++) {
+                if(counter == num) getOfficeFloor(i).addOffice(j, newOffice);
+                counter++;
             }
         }
     }
@@ -217,13 +215,12 @@ public class OfficeBuilding {
         Удаление офиса по номеру в здании
     */
     public void removeOffice(int num) {
-        if(num < size) {
-            int counter = 0;
-            for (int i = 0; i < size; i++) {
-                for (int j = 0; j < getOfficeFloor(i).getOfficesCount(); j++) {
-                    if(counter == num) getOfficeFloor(i).removeOffice(j);
-                    counter++;
-                }
+        if((num < 0) || (num >= getOfficesCount())) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
+        int counter = 0;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < getOfficeFloor(i).getOfficesCount(); j++) {
+                if(counter == num) getOfficeFloor(i).removeOffice(j);
+                counter++;
             }
         }
     }
