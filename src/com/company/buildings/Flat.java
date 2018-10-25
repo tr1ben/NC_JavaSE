@@ -1,6 +1,6 @@
 package com.company.buildings;
 
-public class Flat {
+public class Flat implements Space {
     private double area;
     private int roomsCount;
 
@@ -28,9 +28,7 @@ public class Flat {
     /*
         Получение площади квартиры
     */
-    public double getArea() {
-        return area;
-    }
+    public double getArea() { return area; }
 
     /*
         Получение количества комнат в квартире

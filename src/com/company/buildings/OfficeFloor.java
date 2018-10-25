@@ -1,6 +1,6 @@
 package com.company.buildings;
 
-public class OfficeFloor {
+public class OfficeFloor implements Floor {
 
     public class Node {
         private Office head;
@@ -97,7 +97,7 @@ public class OfficeFloor {
     /*
         Получение количества офисов на этаже
     */
-    public int getOfficesCount() { return size; }
+    public int getSpacesCount() { return size; }
 
     /*
         Получение общей площади помещений этажа
@@ -128,7 +128,7 @@ public class OfficeFloor {
     /*
         Получение массива офисов этажа
     */
-    public Office[] getOffices() {
+    public Space[] getSpaces() {
         Office[] offices = new Office[size];
         for (int i = 0; i < size; i++) {
             offices[i] = getNode(i+1).getHead();
@@ -139,7 +139,7 @@ public class OfficeFloor {
     /*
         Получение офиса по номеру на этаже
     */
-    public Office getOffice(int num) {
+    public Space getSpace(int num) {
         if((num < 0) || (num >= size)) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
         return getNode(num+1).getHead();
     }
@@ -147,23 +147,23 @@ public class OfficeFloor {
     /*
         Изменение офиса по номеру на этаже и ссылке на обновленный офис
     */
-    public void setOffice(int num, Office newOffice) {
+    public void setSpace(int num, Space newSpace) {
         if((num < 0) || (num >= size)) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
-        getNode(num+1).setHead(newOffice);
+        getNode(num+1).setHead((Office)newSpace);
     }
 
     /*
         Добавление нового офиса на этаже по будущему номеру офиса
     */
-    public void addOffice(int num, Office office) {
+    public void addSpace(int num, Space space) {
         if((num < 0) || (num > size)) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
-        insertNode(num+1, new Node(office));
+        insertNode(num+1, new Node((Office)space));
     }
 
     /*
         Удаление офиса по номеру на этаже
     */
-    public void removeOffice(int num) {
+    public void removeSpace(int num) {
         if((num < 0) || (num >= size)) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
         removeNode(num+1);
     }

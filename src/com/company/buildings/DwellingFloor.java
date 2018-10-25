@@ -1,6 +1,6 @@
 package com.company.buildings;
 
-public class DwellingFloor {
+public class DwellingFloor implements Floor {
     private Flat[] flats;
 
     public DwellingFloor(Flat[] flats) {
@@ -15,7 +15,7 @@ public class DwellingFloor {
     /*
         Получение количества квартир на этаже
     */
-    public int getFlatsCount() { return flats.length; }
+    public int getSpacesCount() { return flats.length; }
 
     /*
         Получение общей площади квартир этажа
@@ -38,14 +38,14 @@ public class DwellingFloor {
     /*
         Получение массива квартир этажа
     */
-    public Flat[] getFlats() {
+    public Space[] getSpaces() {
         return flats;
     }
 
     /*
         Получение квартиры по номеру на этаже
     */
-    public Flat getFlat(int num) {
+    public Space getSpace(int num) {
         try { return flats[num]; }
         catch(ArrayIndexOutOfBoundsException e) {
             throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
@@ -55,8 +55,8 @@ public class DwellingFloor {
     /*
         Изменение квартиры по номеру на этаже и ссылке на новую квартиру
     */
-    public void setFlat(int num, Flat newFlat) {
-        try { flats[num] = newFlat; }
+    public void setSpace(int num, Space newSpace) {
+        try { flats[num] = (Flat)newSpace; }
         catch(ArrayIndexOutOfBoundsException e) {
             throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
         }
@@ -65,12 +65,12 @@ public class DwellingFloor {
     /*
         Добавление новой квартиры по будущему номеру на этаже и ссылке на новую квартиру
     */
-    public void addFlat(int num, Flat newFlat) {
+    public void addSpace(int num, Space newSpace) {
         if((num < 0) || (num > flats.length)) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
         Flat[] newFlats = new Flat[flats.length + 1];
         int oldNum = 0;
         for (int i = 0; i < newFlats.length; i++) {
-            if (num == i) newFlats[i] = newFlat;
+            if (num == i) newFlats[i] = (Flat) newSpace;
             else {
                 newFlats[i] = flats[oldNum];
                 oldNum++;
@@ -82,7 +82,7 @@ public class DwellingFloor {
     /*
         Удаление квартиры по номеру на этаже
     */
-    public void removeFlat(int num) {
+    public void removeSpace(int num) {
         if((num < 0) || (num >= flats.length)) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
         Flat[] newFlats = new Flat[flats.length - 1];
         int oldNum = 0;

@@ -1,6 +1,6 @@
 package com.company.buildings;
 
-public class Office {
+public class Office implements Space {
     private double area;
     private int roomsCount;
 
