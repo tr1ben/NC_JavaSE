@@ -229,7 +229,7 @@ public class OfficeBuilding implements Building {
         Получение самого большого по площади офиса здания
     */
     public Space getBestSpace() {
-        Office bestSpace = getNode(0).getHead().getBestSpace();
+        Space bestSpace = getNode(0).getHead().getBestSpace();
         for (int i = 1; i < size; i++) {
             if(getNode(i+1).getHead().getBestSpace().getArea() > bestSpace.getArea()) bestSpace = getNode(i+1).getHead().getBestSpace();
         }

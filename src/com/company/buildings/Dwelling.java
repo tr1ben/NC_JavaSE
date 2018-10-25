@@ -128,7 +128,7 @@ public class Dwelling implements Building {
         Получение самой большой по площади квартиры дома
     */
     public Space getBestSpace() {
-        Flat bestFlat = (Flat) getFloor(0).getBestSpace();
+        Space bestFlat = getFloor(0).getBestSpace();
         for (DwellingFloor floor : dwellingFloors) {
             if(floor.getBestSpace().getArea() > bestFlat.getArea()) bestFlat = floor.getBestSpace();
         }

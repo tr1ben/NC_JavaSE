@@ -3,20 +3,20 @@ package com.company.buildings;
 public class OfficeFloor implements Floor {
 
     public class Node {
-        private Office head;
+        private Space head;
         private Node next;
 
-        public Node(Office head) {
+        public Node(Space head) {
             this.head = head;
             this.next = this;
         }
 
-        public Node(Office head, Node next) {
+        public Node(Space head, Node next) {
             this.head = head;
             this.next = next;
         }
 
-        public Office getHead() {
+        public Space getHead() {
             return head;
         }
 
@@ -24,7 +24,7 @@ public class OfficeFloor implements Floor {
             return next;
         }
 
-        public void setHead(Office head) {
+        public void setHead(Space head) {
             this.head = head;
         }
 
@@ -89,7 +89,7 @@ public class OfficeFloor implements Floor {
         for (int i = 1; i < officesCount; i++) addNode(new Node(new Office()));
     }
 
-    public OfficeFloor(Office ... offices) {
+    public OfficeFloor(Space ... offices) {
         headNode = new Node(offices[0]);
         for (int i = 1; i < offices.length; i++) addNode(new Node(offices[i]));
     }
@@ -129,7 +129,7 @@ public class OfficeFloor implements Floor {
         Получение массива офисов этажа
     */
     public Space[] getSpaces() {
-        Office[] offices = new Office[size];
+        Space[] offices = new Office[size];
         for (int i = 0; i < size; i++) {
             offices[i] = getNode(i+1).getHead();
         }
@@ -171,8 +171,8 @@ public class OfficeFloor implements Floor {
     /*
         Получение самого большого по площади офиса этажа
     */
-    public Office getBestSpace() {
-        Office bestSpace = getNode(1).getHead();
+    public Space getBestSpace() {
+        Space bestSpace = getNode(1).getHead();
         for (int i = 2; i < size; i++) {
             if(getNode(i).getHead().getArea() > bestSpace.getArea()) bestSpace = getNode(i).getHead();
         }
