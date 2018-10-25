@@ -1,6 +1,6 @@
 package com.company.buildings;
 
-public class OfficeBuilding {
+public class OfficeBuilding implements Building {
 
     public class Node {
         private Node prev;
@@ -111,10 +111,10 @@ public class OfficeBuilding {
     /*
         Получение общего количества офисов здания
     */
-    public int getOfficesCount() {
+    public int getSpacesCount() {
         int officesCount = 0;
         for (int i = 0; i < size; i++) {
-            officesCount += getNode(i+1).getHead().getOfficesCount();
+            officesCount += getNode(i+1).getHead().getSpacesCount();
         }
         return officesCount;
     }
@@ -144,7 +144,7 @@ public class OfficeBuilding {
     /*
         Получение массива этажей офисного здания
     */
-    public OfficeFloor[] getOfficeFloors(){
+    public Floor[] getFloors(){
         OfficeFloor[] officeFloors = new OfficeFloor[size];
         for (int i = 0; i < size; i++) {
             officeFloors[i] = getNode(i + 1).getHead();
@@ -155,7 +155,7 @@ public class OfficeBuilding {
     /*
         Получение этажа по номеру в здании
     */
-    public OfficeFloor getOfficeFloor(int num) {
+    public Floor getFloor(int num) {
         if((num < 0) || (num >= size)) throw new FloorIndexOutOfBoundsException("FloorIndexOutOfBoundsException");
         return getNode(num+1).getHead();
     }
@@ -163,20 +163,20 @@ public class OfficeBuilding {
     /*
         Изменение этажа по номеру в здании и ссылке на обновленный этаж
     */
-    public void setOfficeFloor(int num, OfficeFloor newOfficeFloor) {
+    public void setFloor(int num, Floor newFloor) {
         if((num < 0) || (num >= size)) throw new SpaceIndexOutOfBoundsException("FloorIndexOutOfBoundsException");
-        getNode(num+1).setHead(newOfficeFloor);
+        getNode(num+1).setHead((OfficeFloor) newFloor);
     }
 
     /*
         Получение офиса по номеру в офисном здании
     */
-    public Office getOffice(int num) {
-        if((num < 0) || (num >= getOfficesCount())) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
+    public Space getSpace(int num) {
+        if((num < 0) || (num >= getSpacesCount())) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
         int counter = 0;
         for (int i = 0; i < size; i++) {
-            for (int j = 0; j < getOfficeFloor(i).getOfficesCount(); j++) {
-                if(counter == num) return getOfficeFloor(i).getOffice(j);
+            for (int j = 0; j < getFloor(i).getSpacesCount(); j++) {
+                if(counter == num) return (Office) getFloor(i).getSpace(j);
                 counter++;
             }
         }
@@ -186,12 +186,12 @@ public class OfficeBuilding {
     /*
         Изменение объекта офиса по номеру в доме и ссылке на новый офис
     */
-    public void setOffice(int num, Office newOffice) {
-        if((num < 0) || (num >= getOfficesCount())) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
+    public void setSpace(int num, Space newSpace) {
+        if((num < 0) || (num >= getSpacesCount())) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
         int counter = 0;
         for (int i = 0; i < size; i++) {
-            for (int j = 0; j < getOfficeFloor(i).getOfficesCount(); j++) {
-                if(counter == num) getOfficeFloor(i).setOffice(j, newOffice);
+            for (int j = 0; j < getFloor(i).getSpacesCount(); j++) {
+                if(counter == num) getFloor(i).setSpace(j, newSpace);
                 counter++;
             }
         }
@@ -200,12 +200,12 @@ public class OfficeBuilding {
     /*
         Добавление офиса в здание по номеру офиса в здании и ссылке на офис
     */
-    public void addOffice(int num, Office newOffice) {
-        if((num < 0) || (num > getOfficesCount())) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
+    public void addSpace(int num, Space newSpace) {
+        if((num < 0) || (num > getSpacesCount())) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
         int counter = 0;
         for (int i = 0; i < size; i++) {
-            for (int j = 0; j < getOfficeFloor(i).getOfficesCount(); j++) {
-                if(counter == num) getOfficeFloor(i).addOffice(j, newOffice);
+            for (int j = 0; j < getFloor(i).getSpacesCount(); j++) {
+                if(counter == num) getFloor(i).addSpace(j, newSpace);
                 counter++;
             }
         }
@@ -214,12 +214,12 @@ public class OfficeBuilding {
     /*
         Удаление офиса по номеру в здании
     */
-    public void removeOffice(int num) {
-        if((num < 0) || (num >= getOfficesCount())) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
+    public void removeSpace(int num) {
+        if((num < 0) || (num >= getSpacesCount())) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
         int counter = 0;
         for (int i = 0; i < size; i++) {
-            for (int j = 0; j < getOfficeFloor(i).getOfficesCount(); j++) {
-                if(counter == num) getOfficeFloor(i).removeOffice(j);
+            for (int j = 0; j < getFloor(i).getSpacesCount(); j++) {
+                if(counter == num) getFloor(i).removeSpace(j);
                 counter++;
             }
         }
@@ -228,7 +228,7 @@ public class OfficeBuilding {
     /*
         Получение самого большого по площади офиса здания
     */
-    public Office getBestSpace() {
+    public Space getBestSpace() {
         Office bestSpace = getNode(0).getHead().getBestSpace();
         for (int i = 1; i < size; i++) {
             if(getNode(i+1).getHead().getBestSpace().getArea() > bestSpace.getArea()) bestSpace = getNode(i+1).getHead().getBestSpace();
@@ -238,10 +238,10 @@ public class OfficeBuilding {
     /*
         Получение отсортированного по убыванию площадей массива офисов
     */
-    public Office[] getDescAreaSortedOfficeList() {
-        Office[] offices = new Office[getOfficesCount()];
+    public Space[] getDescAreaSortedSpaceMassive() {
+        Office[] offices = new Office[getSpacesCount()];
         for (int i = 0; i < offices.length; i++) {
-            offices[i] = getOffice(i);
+            offices[i] = (Office) getSpace(i);
         }
         for (int out = offices.length - 1; out >= 1; out--){
             for (int in = 0; in < out; in++){
