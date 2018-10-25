@@ -14,10 +14,13 @@ public class Flat {
 
     public Flat(double area) {
         this();
+        if(area <= 0) throw new InvalidSpaceAreaException();
         this.area = area;
     }
 
     public Flat(double area, int roomsCount) {
+        if(area <= 0) throw new InvalidSpaceAreaException();
+        if(roomsCount <= 0) throw new InvalidRoomsCountException();
         this.area = area;
         this.roomsCount = roomsCount;
     }

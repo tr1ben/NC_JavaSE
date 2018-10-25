@@ -53,7 +53,7 @@ public class Main {
             System.out.println(oFloors[i].getArea());
         }
         System.out.println("Сортировка:");
-        Office[] offices = fBuilding.getSortedOffices();
+        Office[] offices = fBuilding.getDescAreaSortedOfficeList();
         for (int i = 0; i < offices.length; i++) {
             System.out.println(offices[i].getArea());
         }
