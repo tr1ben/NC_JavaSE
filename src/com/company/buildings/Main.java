@@ -10,12 +10,12 @@ public class Main {
         Flat fifth = new Flat(30, 1);
         DwellingFloor firstFloor = new DwellingFloor(new Flat[]{first, second});
         DwellingFloor secondFloor = new DwellingFloor(3);
-        secondFloor.addFlat(100, new Flat());
+        secondFloor.addSpace(100, new Flat());
         DwellingFloor thirdFloor = new DwellingFloor(new Flat[]{third, fourth, fifth});
         Dwelling firstDwelling = new Dwelling(new DwellingFloor[]{firstFloor, secondFloor, thirdFloor});
         Dwelling secondDwelling = new Dwelling(3, new int[]{2,3,2});
         System.out.println(firstDwelling.getArea());
-        Flat[] SortedList = firstDwelling.getDescAreaSortedFlatList();
+        Flat[] SortedList = (Flat[]) firstDwelling.getDescAreaSortedSpaceMassive();
         for (Flat flat : SortedList) System.out.println(flat.getArea());
 
         Office fo = new Office();
@@ -24,7 +24,7 @@ public class Main {
         System.out.println("Fo = " + fo.getArea());
         System.out.println("So = " + so.getArea());
         OfficeFloor fFloor = new OfficeFloor(new Office[]{fo, so, fo, so, so, fo});
-        System.out.println("Офисов: " + fFloor.getOfficesCount());
+        System.out.println("Офисов: " + fFloor.getSpacesCount());
         System.out.println("Area: " + fFloor.getArea());
         System.out.println("Комнат: " + fFloor.getRoomsCount());
         /*fFloor.printOffices();
@@ -48,12 +48,12 @@ public class Main {
         OfficeBuilding fBuilding = new OfficeBuilding(new OfficeFloor[]{fFloor, sFloor, tFloor});
         System.out.println("AREA = " + fBuilding.getArea());
         System.out.println("RoomsCount = " + fBuilding.getRoomsCount());
-        OfficeFloor[] oFloors = fBuilding.getOfficeFloors();
+        OfficeFloor[] oFloors = (OfficeFloor[]) fBuilding.getFloors();
         for (int i = 0; i < oFloors.length; i++) {
             System.out.println(oFloors[i].getArea());
         }
         System.out.println("Сортировка:");
-        Office[] offices = fBuilding.getDescAreaSortedOfficeList();
+        Office[] offices = (Office[]) fBuilding.getDescAreaSortedSpaceMassive();
         for (int i = 0; i < offices.length; i++) {
             System.out.println(offices[i].getArea());
         }

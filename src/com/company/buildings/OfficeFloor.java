@@ -89,7 +89,7 @@ public class OfficeFloor implements Floor {
         for (int i = 1; i < officesCount; i++) addNode(new Node(new Office()));
     }
 
-    public OfficeFloor(Office[] offices) {
+    public OfficeFloor(Office ... offices) {
         headNode = new Node(offices[0]);
         for (int i = 1; i < offices.length; i++) addNode(new Node(offices[i]));
     }

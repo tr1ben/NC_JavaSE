@@ -3,14 +3,12 @@ package com.company.buildings;
 public class Dwelling implements Building {
     private DwellingFloor[] dwellingFloors;
 
-    public Dwelling(int floorsCount, int[] flatsCount) {
+    public Dwelling(int floorsCount, int ... flatsCount) {
         dwellingFloors = new DwellingFloor[floorsCount];
         for (int i = 0; i < dwellingFloors.length; i++) dwellingFloors[i] = new DwellingFloor(flatsCount[i]);
     }
 
-    public Dwelling(DwellingFloor[] dwellingFloors) {
-        this.dwellingFloors = dwellingFloors;
-    }
+    public Dwelling(DwellingFloor ... dwellingFloors) { this.dwellingFloors = dwellingFloors; }
 
     /*
         Получение общего количества этажей дома

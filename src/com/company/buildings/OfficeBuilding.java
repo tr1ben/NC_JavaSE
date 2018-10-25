@@ -93,12 +93,12 @@ public class OfficeBuilding implements Building {
         size--;
     }
 
-    public OfficeBuilding(int floorsCount, int[] officesCounts) {
+    public OfficeBuilding(int floorsCount, int ... officesCounts) {
         headNode = new Node(new OfficeFloor(officesCounts[0]));
         for (int i = 1; i < floorsCount; i++) addNode(new Node(new OfficeFloor(officesCounts[i])));
     }
 
-    public OfficeBuilding(OfficeFloor[] officeFloors) {
+    public OfficeBuilding(OfficeFloor ... officeFloors) {
         headNode = new Node(officeFloors[0]);
         for (int i = 1; i < officeFloors.length; i++) addNode(new Node(officeFloors[i]));
     }

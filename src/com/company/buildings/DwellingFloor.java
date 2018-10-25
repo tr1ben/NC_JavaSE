@@ -3,7 +3,7 @@ package com.company.buildings;
 public class DwellingFloor implements Floor {
     private Flat[] flats;
 
-    public DwellingFloor(Flat[] flats) {
+    public DwellingFloor(Flat ... flats) {
         this.flats = flats;
     }
 
