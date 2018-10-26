@@ -1,6 +1,8 @@
 package com.company.buildings;
 
-public class Office implements Space {
+import java.io.Serializable;
+
+public class Office implements Space, Serializable {
     private double area;
     private int roomsCount;
 

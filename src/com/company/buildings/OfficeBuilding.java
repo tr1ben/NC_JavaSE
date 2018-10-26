@@ -1,6 +1,8 @@
 package com.company.buildings;
 
-public class OfficeBuilding implements Building {
+import java.io.Serializable;
+
+public class OfficeBuilding implements Building, Serializable {
 
     public class Node {
         private Node prev;

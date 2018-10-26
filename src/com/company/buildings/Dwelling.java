@@ -1,14 +1,16 @@
 package com.company.buildings;
 
-public class Dwelling implements Building {
-    private DwellingFloor[] dwellingFloors;
+import java.io.Serializable;
+
+public class Dwelling implements Building, Serializable {
+    private Floor[] dwellingFloors;
 
     public Dwelling(int floorsCount, int ... flatsCount) {
         dwellingFloors = new DwellingFloor[floorsCount];
         for (int i = 0; i < dwellingFloors.length; i++) dwellingFloors[i] = new DwellingFloor(flatsCount[i]);
     }
 
-    public Dwelling(DwellingFloor ... dwellingFloors) { this.dwellingFloors = dwellingFloors; }
+    public Dwelling(Floor ... dwellingFloors) { this.dwellingFloors = dwellingFloors; }
 
     /*
         Получение общего количества этажей дома
@@ -20,7 +22,7 @@ public class Dwelling implements Building {
     */
     public int getSpacesCount() {
         int flatsCount = 0;
-        for (DwellingFloor floor : dwellingFloors) flatsCount += floor.getSpacesCount();
+        for (Floor floor : dwellingFloors) flatsCount += floor.getSpacesCount();
         return flatsCount;
     }
 
@@ -29,7 +31,7 @@ public class Dwelling implements Building {
     */
     public double getArea() {
         double area = 0;
-        for (DwellingFloor floor : dwellingFloors) area += floor.getArea();
+        for (Floor floor : dwellingFloors) area += floor.getArea();
         return area;
     }
 
@@ -38,7 +40,7 @@ public class Dwelling implements Building {
     */
     public int getRoomsCount() {
         int roomsCount = 0;
-        for (DwellingFloor floor : dwellingFloors) roomsCount += floor.getRoomsCount();
+        for (Floor floor : dwellingFloors) roomsCount += floor.getRoomsCount();
         return roomsCount;
     }
 
@@ -73,7 +75,7 @@ public class Dwelling implements Building {
     public Space getSpace(int spaceNum) {
         if((spaceNum < 0) || (spaceNum >= getSpacesCount())) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
         int num = 0;
-        for (DwellingFloor floor : dwellingFloors) {
+        for (Floor floor : dwellingFloors) {
             for (int i = 0; i < floor.getSpacesCount(); i++) {
                 if (num == spaceNum) return (Flat) floor.getSpace(i);
                 num++;
@@ -88,7 +90,7 @@ public class Dwelling implements Building {
     public void setSpace(int spaceNum, Space newSpace){
         if((spaceNum < 0) || (spaceNum >= getSpacesCount())) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
         int num = 0;
-        for (DwellingFloor floor : dwellingFloors) {
+        for (Floor floor : dwellingFloors) {
             for (int i = 0; i < floor.getSpacesCount(); i++) {
                 if (num == spaceNum) floor.setSpace(i, newSpace);
                 num++;
@@ -102,7 +104,7 @@ public class Dwelling implements Building {
     public void addSpace(int spaceNum, Space newSpace){
         if((spaceNum < 0) || (spaceNum > getSpacesCount())) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
         int num = 0;
-        for (DwellingFloor floor : dwellingFloors) {
+        for (Floor floor : dwellingFloors) {
             for (int i = 0; i < floor.getSpacesCount(); i++) {
                 if (num == spaceNum) floor.addSpace(i, newSpace);
                 num++;
@@ -116,7 +118,7 @@ public class Dwelling implements Building {
     public void removeSpace(int spaceNum) {
         if((spaceNum < 0) || (spaceNum >= getSpacesCount())) throw new SpaceIndexOutOfBoundsException("SpaceIndexOutOfBoundsException");
         int num = 0;
-        for (DwellingFloor floor : dwellingFloors) {
+        for (Floor floor : dwellingFloors) {
             for (int i = 0; i < floor.getSpacesCount(); i++) {
                 if (num == spaceNum) floor.removeSpace(i);
                 num++;
@@ -129,7 +131,7 @@ public class Dwelling implements Building {
     */
     public Space getBestSpace() {
         Space bestFlat = getFloor(0).getBestSpace();
-        for (DwellingFloor floor : dwellingFloors) {
+        for (Floor floor : dwellingFloors) {
             if(floor.getBestSpace().getArea() > bestFlat.getArea()) bestFlat = floor.getBestSpace();
         }
         return bestFlat;
