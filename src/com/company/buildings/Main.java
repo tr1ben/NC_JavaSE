@@ -77,5 +77,8 @@ public class Main {
         }
         System.out.println("Area: " + dw.getArea());
         System.out.println("Area: " + dw.getArea());
+        System.out.println(dw.getSpace(0));
+        System.out.println(dw.getFloor(0));
+        System.out.println(dw);
     }
 }

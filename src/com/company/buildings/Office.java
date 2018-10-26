@@ -54,4 +54,9 @@ public class Office implements Space, Serializable {
     public void setRoomsCount(int roomsCount) {
         this.roomsCount = roomsCount;
     }
+
+    @Override
+    public String toString() {
+        return "Office (" + roomsCount + ", " + area + ")";
+    }
 }

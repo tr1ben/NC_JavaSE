@@ -52,4 +52,9 @@ public class Flat implements Space, Serializable {
     public void setRoomsCount(int roomsCount) {
         this.roomsCount = roomsCount;
     }
+
+    @Override
+    public String toString() {
+        return "Flat (" + roomsCount + ", " + area + ")";
+    }
 }

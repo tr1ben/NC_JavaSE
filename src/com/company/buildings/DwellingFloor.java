@@ -108,4 +108,13 @@ public class DwellingFloor implements Floor, Serializable {
         }
         return bestFlat;
     }
+
+    @Override
+    public String toString() {
+        StringBuffer floorString = new StringBuffer();
+        floorString.append("DwellingFloor (" + flats.length);
+        for(Space flat : flats) floorString.append(", " + flat);
+        floorString.append(")");
+        return floorString.toString();
+    }
 }

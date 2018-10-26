@@ -256,4 +256,13 @@ public class OfficeBuilding implements Building, Serializable {
         }
         return offices;
     }
+
+    @Override
+    public String toString() {
+        StringBuffer dwellingString = new StringBuffer();
+        dwellingString.append("OfficeBuilding (" + size);
+        for(Floor floor : getFloors()) dwellingString.append(", " + floor);
+        dwellingString.append(")");
+        return dwellingString.toString();
+    }
 }

@@ -156,4 +156,13 @@ public class Dwelling implements Building, Serializable {
         }
         return flats;
     }
+
+    @Override
+    public String toString() {
+        StringBuffer dwellingString = new StringBuffer();
+        dwellingString.append("Dwelling (" + dwellingFloors.length);
+        for(Floor floor : dwellingFloors) dwellingString.append(", " + floor);
+        dwellingString.append(")");
+        return dwellingString.toString();
+    }
 }

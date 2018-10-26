@@ -181,4 +181,12 @@ public class OfficeFloor implements Floor, Serializable {
         return bestSpace;
     }
 
+    @Override
+    public String toString() {
+        StringBuffer floorString = new StringBuffer();
+        floorString.append("OfficeFloor (" + size);
+        for(Space office : getSpaces()) floorString.append(", " + office);
+        floorString.append(")");
+        return floorString.toString();
+    }
 }
