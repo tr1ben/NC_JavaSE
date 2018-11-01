@@ -1,6 +1,7 @@
 package com.company.buildings;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Office implements Space, Serializable {
     private double area;
@@ -58,5 +59,22 @@ public class Office implements Space, Serializable {
     @Override
     public String toString() {
         return "Office (" + roomsCount + ", " + area + ")";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Office office = (Office) o;
+        return Double.compare(office.area, area) == 0 &&
+                roomsCount == office.roomsCount;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = roomsCount;
+        long l = Double.doubleToLongBits(area);
+        hash ^= (int)(l >> 32) ^ (int)(l & 0xFFFFFFFF);
+        return hash;
     }
 }

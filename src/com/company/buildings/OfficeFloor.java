@@ -1,6 +1,8 @@
 package com.company.buildings;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class OfficeFloor implements Floor, Serializable {
 
@@ -188,5 +190,22 @@ public class OfficeFloor implements Floor, Serializable {
         for(Space office : getSpaces()) floorString.append(", " + office);
         floorString.append(")");
         return floorString.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OfficeFloor that = (OfficeFloor) o;
+        return size == that.size && Arrays.equals(this.getSpaces(), that.getSpaces());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = this.getSpaces().length;
+        for (int i = 0; i < this.getSpaces().length; i++) {
+            hash ^= this.getSpace(i).hashCode();
+        }
+        return hash;
     }
 }

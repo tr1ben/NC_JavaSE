@@ -15,7 +15,8 @@ public class Main {
         DwellingFloor secondFloor = new DwellingFloor(3);
         DwellingFloor thirdFloor = new DwellingFloor(new Flat[]{third, fourth, fifth});
         Dwelling firstDwelling = new Dwelling(new DwellingFloor[]{firstFloor, secondFloor, thirdFloor});
-        Dwelling secondDwelling = new Dwelling(3, new int[]{2,3,2});
+        Dwelling thDwelling = new Dwelling(new DwellingFloor[]{secondFloor, thirdFloor});
+        Dwelling secondDwelling = new Dwelling(3, new int[]{2, 3, 2});
         System.out.println(firstDwelling.getArea());
         Flat[] SortedList = (Flat[]) firstDwelling.getDescAreaSortedSpaceMassive();
         for (Flat flat : SortedList) System.out.println(flat.getArea());
@@ -26,6 +27,7 @@ public class Main {
         System.out.println("Fo = " + fo.getArea());
         System.out.println("So = " + so.getArea());
         OfficeFloor fFloor = new OfficeFloor(new Office[]{fo, so, fo, so, so, fo});
+        OfficeFloor f1Floor = new OfficeFloor(new Office[]{fo, so, fo, so, so, fo});
         System.out.println("Офисов: " + fFloor.getSpacesCount());
         System.out.println("Area: " + fFloor.getArea());
         System.out.println("Комнат: " + fFloor.getRoomsCount());
@@ -33,23 +35,24 @@ public class Main {
         OfficeFloor sFloor = new OfficeFloor(new Office[]{qo, fo, so});
         OfficeFloor tFloor = new OfficeFloor(new Office[]{so, so, fo});
         OfficeBuilding fBuilding = new OfficeBuilding(new OfficeFloor[]{fFloor, sFloor, tFloor});
+        OfficeBuilding f2Building = new OfficeBuilding(new OfficeFloor[]{fFloor, sFloor, new OfficeFloor(new Office[]{so, so, fo})});
         OutputStream of = new FileOutputStream(new File("sadd.txt"));
         Buildings.outputBuilding(fBuilding, of);
         InputStream in = new FileInputStream(new File("sadd.txt"));
         Dwelling dw = (Dwelling) Buildings.inputBuilding(in);
+        InputStream in2 = new FileInputStream(new File("sadd.txt"));
+        Dwelling dwx = (Dwelling) Buildings.inputBuilding(in2);
         int ex = 0;
         for (Floor fl : dw.getFloors()) {
             System.out.println("Этаж " + ex++);
-            for(Space s : fl.getSpaces()){
+            for (Space s : fl.getSpaces()) {
                 System.out.println(s.getRoomsCount() + " " + s.getArea());
             }
         }
         OfficeFloor[] oFloors = (OfficeFloor[]) fBuilding.getFloors();
         System.out.println("Сортировка:");
         Office[] offices = (Office[]) fBuilding.getDescAreaSortedSpaceMassive();
-        for (int i = 0; i < offices.length; i++) {
-            System.out.println(offices[i].getArea());
-        }
+        for (int i = 0; i < offices.length; i++) System.out.println(offices[i].getArea());
 
         /**
          * Проверка сериализации
@@ -66,9 +69,11 @@ public class Main {
          * Проверка десериализации
          */
         Dwelling dw1 = null;
+        Dwelling dw2 = null;
         try {
             ObjectInputStream oIn = new ObjectInputStream(new FileInputStream("out.bin"));
             dw1 = (Dwelling) oIn.readObject();
+            dw2 = (Dwelling) oIn.readObject();
             in.close();
         } catch (IOException e) {
             System.out.println("Serialization error");

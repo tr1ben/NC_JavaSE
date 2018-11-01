@@ -1,6 +1,7 @@
 package com.company.buildings;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Dwelling implements Building, Serializable {
     private Floor[] dwellingFloors;
@@ -164,5 +165,22 @@ public class Dwelling implements Building, Serializable {
         for(Floor floor : dwellingFloors) dwellingString.append(", " + floor);
         dwellingString.append(")");
         return dwellingString.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dwelling dwelling = (Dwelling) o;
+        return Arrays.equals(dwellingFloors, dwelling.dwellingFloors);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = dwellingFloors.length;
+        for (int i = 0; i < dwellingFloors.length; i++) {
+            hash ^= dwellingFloors[i].hashCode();
+        }
+        return hash;
     }
 }
